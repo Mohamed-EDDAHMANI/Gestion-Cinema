@@ -3,8 +3,9 @@ require_once 'Member.php';
 
 class Client extends Member {
     
-    public function seeListOfFilms($pdo) {
-        $stmt = $pdo->query("SELECT * FROM films");
+    public function seeListOfFilms($conn) {
+        $stmt = $conn->prepare("SELECT * FROM films");
+        $stmt->execute();
         return $stmt->fetchAll();
     }
 
