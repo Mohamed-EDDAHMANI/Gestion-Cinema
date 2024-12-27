@@ -5,7 +5,13 @@ require_once '../classes/Member.php';
 
 $member = new Member('user2', 'user2@example.com', 'password', 'admine');
 
+echo 'testing the validation user';
+echo 'the insert is : ' . $member->validateMember() ;
+
+
 echo 'testing the create user';
-echo 'the insert is : ' . $member->insertMember() ;
+if ($member->validateMember()){
+    $member->insertMember();
+}
 
 ?>

@@ -5,16 +5,16 @@ require_once 'Member.php';
 
 class Administrateur extends Member {
 
-    public function validateFilm($titre, $genre, $duration, $director) {
-        if (!empty($titre) && !empty($genre) && !empty($duration && !empty($director))) {
+    public function validateFilm($titre, $genre, $duration, $date_realiser, $director) {
+        if (!empty($titre) && !empty($genre) && !empty($duration && !empty($date_realiser) && !empty($director))) {
             return true; 
         } 
         return false;
     }
 
-    public function createFilm($titre, $genre, $duration, $director){
+    public function createFilm($titre, $genre, $duration, $date_realiser, $director){
         $nom_table = "films";
-        $req = "INSERT INTO $nom_table (title , genre , duration, director) VALUES (:title, :genre, :duration, :director)";
+        $req = "INSERT INTO $nom_table (title , genre , duration, date_realiser, director) VALUES (:title, :genre, :duration, :date_realiser, :director)";
 
         $db = new Database();
         $conn = $db->connect();
@@ -23,6 +23,7 @@ class Administrateur extends Member {
         $requete->bindParam(':title', $titre);
         $requete->bindParam(':genre', $genre);
         $requete->bindParam(':duration', $duration);
+        $requete->bindParam(':date_realiser', $date_realiser);
         $requete->bindParam(':director', $director);
         return $requete->execute();
     }
@@ -38,10 +39,11 @@ class Administrateur extends Member {
     public function updateFilm($filmId, $newDetails) {
         $db = new Database();
         $conn = $db->connect();
-        $requete = $conn->prepare("UPDATE films SET title = :title, genre = :genre, duration = :duration, director = :director WHERE id = :id");
+        $requete = $conn->prepare("UPDATE films SET title = :title, genre = :genre, duration = :duration, date_realiser = :date_realiser , director = :director WHERE id = :id");
         $requete->bindParam(':title', $newDetails['title']);
         $requete->bindParam(':genre', $newDetails['genre']);
         $requete->bindParam(':duration', $newDetails['duration']);
+        $requete->bindParam(':date_realiser', $newDetails['date_realiser']);
         $requete->bindParam(':director', $newDetails['director']);
         $requete->bindParam(':id', $filmId);
         $requete->execute();
