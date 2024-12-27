@@ -1,22 +1,58 @@
 <?php
 
-include './Member.php';
+// include '../config/database.php';
+require_once 'Member.php';
 
 class Administrateur extends Member {
 
-    public function createFilm($title, $description) {
-        // Code to create a new film
+    public function validateFilm($titre, $genre, $duration, $director) {
+        if (!empty($titre) && !empty($genre) && !empty($duration && !empty($director))) {
+            return true; 
+        } 
+        return false;
     }
 
-    public function readFilm($filmId) {
-        // Code to read a film's details
+    public function createFilm($titre, $genre, $duration, $director){
+        $nom_table = "films";
+        $req = "INSERT INTO $nom_table (title , genre , duration, director) VALUES (:title, :genre, :duration, :director)";
+
+        $db = new Database();
+        $conn = $db->connect();
+
+        $requete = $conn->prepare($req);
+        $requete->bindParam(':title', $titre);
+        $requete->bindParam(':genre', $genre);
+        $requete->bindParam(':duration', $duration);
+        $requete->bindParam(':director', $director);
+        return $requete->execute();
+    }
+
+    public function readFilm() {
+        $db = new Database();
+        $conn = $db->connect();
+        $stmt = $conn->prepare("SELECT * FROM films");
+        $stmt->execute();
+        return $stmt->fetch();
     }
 
     public function updateFilm($filmId, $newDetails) {
-        // Code to update a film's details
+        $db = new Database();
+        $conn = $db->connect();
+        $requete = $conn->prepare("UPDATE films SET title = :title, genre = :genre, duration = :duration, director = :director WHERE id = :id");
+        $requete->bindParam(':title', $newDetails['title']);
+        $requete->bindParam(':genre', $newDetails['genre']);
+        $requete->bindParam(':duration', $newDetails['duration']);
+        $requete->bindParam(':director', $newDetails['director']);
+        $requete->bindParam(':id', $filmId);
+        $requete->execute();
+        return "Film updated successfully.";
     }
 
     public function deleteFilm($filmId) {
-        // Code to delete a film
+        $db = new Database();
+        $conn = $db->connect();
+        $stmt = $conn->prepare("DELETE FROM films WHERE id = ?"); 
+        $stmt->execute([$filmId]); 
+        return "Film deleted successfully.";
     }
 }

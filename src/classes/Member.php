@@ -1,8 +1,8 @@
 <?php
-include '../config/database.php';
+// include '../config/database.php';
 
 
-class Membre{
+class Member {
     protected $nom;
     protected $email;
     protected $mot_pass;
@@ -16,7 +16,7 @@ class Membre{
         $this->role = $role;
     }
 
-    public function validate() {
+    public function validateMember() {
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL) && !empty($this->nom) && !empty($this->mot_pass && !empty($this->role))) {
             return true; 
         } 
@@ -35,22 +35,10 @@ class Membre{
         $requete->bindParam(':email', $this->email);
         $requete->bindParam(':mot_pass', $this->mot_pass);
         $requete->bindParam(':role', $this->role);
-        $requete->execute();
+         return $requete->execute();
     }
 
 }
-
-$membre1 = new Membre('test2','test@example.com','password','client');
-echo 'hello';
-echo $membre1->validate();
-if($membre1->validate()){
-    $membre1->insertMember();
-    echo'sec';
-}
-
-
-
-
 
 
 ?>
