@@ -38,6 +38,24 @@ class Member {
          return $requete->execute();
     }
 
+    public function login($email, $mot_pass) {
+        $db = new Database();
+        $conn = $db->connect();
+        $query = "SELECT * FROM members WHERE email = :email AND mot_pass = :mot_pass";
+        $stmt = $conn->prepare($query);
+
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $mot_pass);
+
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
 
 

@@ -9,10 +9,10 @@ class Client extends Member {
         return $stmt->fetchAll();
     }
 
-    public function reserveTicket($pdo, $filmId) {
-        $stmt = $pdo->prepare("INSERT INTO tickets (film_id, client_id) VALUES (?, ?)");
-        $stmt->execute([$filmId, $this->email]);
-        return "Ticket reserved successfully.";
-    }
+    // public function reserveTicket($conn, $filmId) {
+    //     $stmt = $conn->prepare("INSERT INTO tickets (film_id, client_id) VALUES (?, ?)");
+    //     $stmt->execute([$filmId, $this->email]);
+    //     return "Ticket reserved successfully.";
+    // }
 }
 ?>

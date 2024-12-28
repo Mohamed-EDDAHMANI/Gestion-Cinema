@@ -12,9 +12,9 @@ class Administrateur extends Member {
         return false;
     }
 
-    public function createFilm($titre, $genre, $duration, $date_realiser, $director){
+    public function createFilm($titre, $genre, $duration, $date_realiser, $director , $projection_id){
         $nom_table = "films";
-        $req = "INSERT INTO $nom_table (title , genre , duration, date_realiser, director) VALUES (:title, :genre, :duration, :date_realiser, :director)";
+        $req = "INSERT INTO $nom_table (title , genre , duration, date_realiser, director, projection_id) VALUES (:title, :genre, :duration, :date_realiser, :director, :projection_id)";
 
         $db = new Database();
         $conn = $db->connect();
@@ -25,6 +25,7 @@ class Administrateur extends Member {
         $requete->bindParam(':duration', $duration);
         $requete->bindParam(':date_realiser', $date_realiser);
         $requete->bindParam(':director', $director);
+        $requete->bindParam(':projection_id', $projection_id);
         return $requete->execute();
     }
 

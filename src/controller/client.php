@@ -17,6 +17,7 @@ echo '</br> </br>';
 
 //testing reservation 
 
+// $client->reserveTicket($conn, 3);
 
 
 
