@@ -24,26 +24,26 @@ if($validationResponse){
     echo 'validation and insert seccess +++++++</br> </br>';
 }
 
-// // Test readFilm method
-// echo "Testing readFilm method: </br>";
-// $films = $admin->readFilm();
-// print_r($films);
-// echo '</br> </br>';
+// Test readFilm method
+echo "Testing readFilm method: </br>";
+$films = $admin->readFilm();
+print_r($films);
+echo '</br> </br>';
 
-// // Test updateFilm method
-// echo "Testing updateFilm method: </br>";
-// $newDetails = array(
-//     'title' => 'Updated Film',
-//     'genre' => 'Drama',
-//     'duration' => 130,
-//     'date_realiser' => '2026/01/08',
-//     'director' => 'Updated Director',
-//     'projection_id' => 3
-// );
-// // print_r($newDetails);
-// // echo 'update : ' . $admin->updateFilm($films['id'], $newDetails) . '</br> </br>';
+// Test updateFilm method
+echo "Testing updateFilm method: </br>";
+$newDetails = array(
+    'title' => 'Updated Film',
+    'genre' => 'Drama',
+    'duration' => 130,
+    'date_realiser' => '2026/01/08',
+    'director' => 'Updated Director',
+    'projection_id' => 3
+);
+print_r($newDetails);
+echo 'update : ' . $admin->updateFilm($films['id'], $newDetails) . '</br> </br>';
 
-// // // Test deleteFilm method
-// // echo "Testing deleteFilm method: </br>";
-// // echo $admin->deleteFilm($films['id']);
+// Test deleteFilm method
+echo "Testing deleteFilm method: </br>";
+echo $admin->deleteFilm($films['id']);
 ?>
